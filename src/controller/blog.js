@@ -1,21 +1,7 @@
-export const getList = (author, keyword) => {
-  return [
-    {
-      id: 1,
-      name: '张三',
-      age: 18
-    },
-    {
-      id: 2,
-      name: '张三2',
-      age: 19
-    },
-    {
-      id: 3,
-      name: '张三3',
-      age: 20
-    }
-  ];
+import {fetchData} from './../db/mysql.js'
+export const getList = async (author, keyword) => {
+  const res = await fetchData();
+  return res
 };
 export const updateBlog = (pageNum, body = {}) => {
   console.log('pageNum', pageNum)

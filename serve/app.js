@@ -32,11 +32,12 @@ export const serverHandler = (req, res) => {
   const url = req.url;
   req.path = url.split('?')[0];
   req.query = querystring.parse(url.split('?')[1]);
-  getPostData(req).then((postData) => {
+  getPostData(req).then(async (postData) => {
     req.body = postData
-    console.log('blogData',postData);
-    const blogData = handleBlogRoute(req, res);
+    const blogData = await handleBlogRoute(req, res);
+    console.log('blogData',blogData);
     if (blogData) {
+      res.writeHead(200, { "Content-Type": "text/plain;charset=utf-8" });
       res.end(JSON.stringify(blogData));
       return;
     }
